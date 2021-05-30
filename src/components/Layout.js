@@ -48,7 +48,7 @@ export default function Layout() {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <Header open={open} handleToggleDrawer={handleToggleDrawer} />
+      <Header handleToggleDrawer={handleToggleDrawer} />
       <SideMenu open={open} />
       <Main />
     </div>
