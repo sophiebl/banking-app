@@ -41,19 +41,15 @@ export default function Layout() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
+  const handleToggleDrawer = () => {
+    open ? setOpen(false) : setOpen(true);
   };
 
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <Header open={open} handleDrawerOpen={handleDrawerOpen} />
-      <SideMenu open={open} handleDrawerClose={handleDrawerClose} />
+      <Header open={open} handleToggleDrawer={handleToggleDrawer} />
+      <SideMenu open={open} />
       <Main />
     </div>
   );

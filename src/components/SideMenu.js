@@ -1,17 +1,17 @@
 import React from "react";
 import clsx from "clsx";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
-import IconButton from "@material-ui/core/IconButton";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
+import HomeIcon from "@material-ui/icons/Home";
+import AccountBalanceWalletIcon from "@material-ui/icons/AccountBalanceWallet";
+import TransferIcon from "@material-ui/icons/SwapHoriz";
+import CbIcon from "@material-ui/icons/Payment";
+import PhoneIcon from "@material-ui/icons/Phone";
 
 const drawerWidth = 240;
 
@@ -39,20 +39,37 @@ const useStyles = makeStyles((theme) => ({
       width: theme.spacing(9) + 1,
     },
   },
-  toolbar: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "flex-end",
-    padding: theme.spacing(0, 1),
+  verticalSpacer: {
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
   },
 }));
 
-export default function SideMenu({ open, handleDrawerClose }) {
-  const classes = useStyles();
-  const theme = useTheme();
+const menuItems = [
+  {
+    text: "Overview",
+    icon: <HomeIcon />,
+  },
+  {
+    text: "Accounts",
+    icon: <AccountBalanceWalletIcon />,
+  },
+  {
+    text: "Transfers",
+    icon: <TransferIcon />,
+  },
+  {
+    text: "Credit Cards",
+    icon: <CbIcon />,
+  },
+  {
+    text: "Support",
+    icon: <PhoneIcon />,
+  },
+];
 
+export default function SideMenu({ open }) {
+  const classes = useStyles();
   return (
     <Drawer
       variant="permanent"
@@ -67,33 +84,12 @@ export default function SideMenu({ open, handleDrawerClose }) {
         }),
       }}
     >
-      <div className={classes.toolbar}>
-        <IconButton onClick={handleDrawerClose}>
-          {theme.direction === "rtl" ? (
-            <ChevronRightIcon />
-          ) : (
-            <ChevronLeftIcon />
-          )}
-        </IconButton>
-      </div>
+      <div className={classes.verticalSpacer}></div>
       <Divider />
       <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
+        {menuItems.map(({ text, icon }, index) => (
           <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
+            <ListItemIcon>{icon}</ListItemIcon>
             <ListItemText primary={text} />
           </ListItem>
         ))}
