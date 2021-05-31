@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import {
   Button,
   Container,
@@ -11,6 +13,8 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 
 import { login, getUser } from "../../helpers/auth";
+
+toast.configure();
 
 const useLoginForm = () => {
   const [inputs, setInputs] = useState({
@@ -28,7 +32,8 @@ const useLoginForm = () => {
         await login(identifier, password);
         window.location = "/";
       } catch (err) {
-        console.log(err);
+        console.error(err);
+        toast("Incorrect identifier and/or password");
       }
     }
   };
@@ -136,6 +141,7 @@ const Login = ({ location }) => {
           </Grid>
         </form>
       </Box>
+      <ToastContainer />
     </Container>
   );
 };
