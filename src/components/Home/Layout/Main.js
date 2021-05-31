@@ -40,9 +40,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Main() {
+export default function Main({ userData }) {
   const classes = useStyles();
   const preventDefault = (event) => event.preventDefault();
+
+  const { username, transactions_emitted } = userData;
 
   return (
     <main className={classes.content}>
@@ -51,7 +53,7 @@ export default function Main() {
         <Grid item sm={12}>
           <div className={classes.titleContainer}>
             <Typography variant="h3"> OVERVIEW</Typography>
-            <Typography variant="h4">Hi Simon, welcome back!</Typography>
+            <Typography variant="h4">Hi {username}, welcome back!</Typography>
           </div>
         </Grid>
       </Grid>
@@ -110,7 +112,7 @@ export default function Main() {
           <Paper elevation={3}>
             <Box p={2}>
               <Typography variant="h5"> Your last transactions </Typography>
-              <OperationsTimeline />
+              <OperationsTimeline transactions={transactions_emitted} />
             </Box>
           </Paper>
         </Grid>

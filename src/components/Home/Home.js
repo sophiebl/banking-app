@@ -59,7 +59,7 @@ export default function Home() {
       <CssBaseline />
       <Header handleToggleDrawer={handleToggleDrawer} />
       <SideMenu open={open} />
-      <Main />
+      <Main userData={userData} />
     </div>
   );
 }

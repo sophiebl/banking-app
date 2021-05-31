@@ -9,10 +9,7 @@ import {
   TimelineItem,
   Timeline,
 } from "@material-ui/lab";
-import FastfoodIcon from "@material-ui/icons/Fastfood";
-import LaptopMacIcon from "@material-ui/icons/LaptopMac";
 import HotelIcon from "@material-ui/icons/Hotel";
-import RepeatIcon from "@material-ui/icons/Repeat";
 import { Typography, Paper } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
@@ -24,84 +21,34 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function OperationsTimeline() {
+export default function OperationsTimeline({ transactions }) {
   const classes = useStyles();
 
-  return (
-    <Timeline align="alternate">
-      <TimelineItem>
-        <TimelineOppositeContent>
-          <Typography variant="body2" color="textSecondary">
-            9:30 am
-          </Typography>
-        </TimelineOppositeContent>
-        <TimelineSeparator>
-          <TimelineDot>
-            <FastfoodIcon />
-          </TimelineDot>
-          <TimelineConnector />
-        </TimelineSeparator>
-        <TimelineContent>
-          <Paper elevation={3} className={classes.paper}>
-            <Typography variant="h6" component="h1">
-              Eat
+  const transactionsPreview = transactions
+    .map(({ amount, created_at, description }, idx) => {
+      return (
+        <TimelineItem>
+          <TimelineOppositeContent>
+            <Typography variant="body2" color="textSecondary">
+              {created_at}
             </Typography>
-            <Typography>Because you need strength</Typography>
-          </Paper>
-        </TimelineContent>
-      </TimelineItem>
-      <TimelineItem>
-        <TimelineOppositeContent>
-          <Typography variant="body2" color="textSecondary">
-            10:00 am
-          </Typography>
-        </TimelineOppositeContent>
-        <TimelineSeparator>
-          <TimelineDot color="primary">
-            <LaptopMacIcon />
-          </TimelineDot>
-          <TimelineConnector />
-        </TimelineSeparator>
-        <TimelineContent>
-          <Paper elevation={3} className={classes.paper}>
-            <Typography variant="h6" component="h1">
-              Code
-            </Typography>
-            <Typography>Because it&apos;s awesome!</Typography>
-          </Paper>
-        </TimelineContent>
-      </TimelineItem>
-      <TimelineItem>
-        <TimelineSeparator>
-          <TimelineDot color="primary" variant="outlined">
-            <HotelIcon />
-          </TimelineDot>
-          <TimelineConnector className={classes.secondaryTail} />
-        </TimelineSeparator>
-        <TimelineContent>
-          <Paper elevation={3} className={classes.paper}>
-            <Typography variant="h6" component="h1">
-              Sleep
-            </Typography>
-            <Typography>Because you need rest</Typography>
-          </Paper>
-        </TimelineContent>
-      </TimelineItem>
-      <TimelineItem>
-        <TimelineSeparator>
-          <TimelineDot color="secondary">
-            <RepeatIcon />
-          </TimelineDot>
-        </TimelineSeparator>
-        <TimelineContent>
-          <Paper elevation={3} className={classes.paper}>
-            <Typography variant="h6" component="h1">
-              Repeat
-            </Typography>
-            <Typography>Because this is the life you love!</Typography>
-          </Paper>
-        </TimelineContent>
-      </TimelineItem>
-    </Timeline>
-  );
+          </TimelineOppositeContent>
+          <TimelineSeparator>
+            <TimelineDot color="primary" variant="outlined">
+              <HotelIcon />
+            </TimelineDot>
+            <TimelineConnector />
+          </TimelineSeparator>
+          <TimelineContent>
+            <Paper elevation={3} className={classes.paper}>
+              <Typography variant="h3">{amount}€</Typography>
+              <Typography variant="body2">{description}</Typography>
+            </Paper>
+          </TimelineContent>
+        </TimelineItem>
+      );
+    })
+    .slice(0, 4);
+
+  return <Timeline align="alternate">{transactionsPreview}</Timeline>;
 }
