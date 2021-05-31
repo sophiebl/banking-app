@@ -3,9 +3,9 @@ import { Box, Link, Grid, Paper, Typography } from "@material-ui/core";
 
 import { makeStyles } from "@material-ui/core/styles";
 
-import ContactsTable from "./ContactsTable";
-import OperationsTimeline from "./OperationsTimeline";
-import LinearProgressWithLabel from "./LinearProgressWithLabel";
+import ContactsTable from "../Elements/ContactsTable";
+import OperationsTimeline from "../Elements/OperationsTimeline";
+import LinearProgressWithLabel from "../Elements/LinearProgressWithLabel";
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
