@@ -36,24 +36,39 @@ export const themeObjectForType = (type) => ({
       fontSize: 24,
     },
     h3: {
-      fontWeight: 300,
+      fontWeight: 500,
       fontSize: 24,
     },
     h4: {
-      fontSize: 16,
+      fontWeight: 300,
+      fontSize: 20,
     },
     h5: {
-      fontSize: 14,
+      fontSize: 18,
       color: "#979797",
+    },
+    h6: {
+      fontSize: 16,
+      fontWeight: 500,
+      color: "#FFF",
     },
     body1: {
       fontWeight: 500,
     },
-    button: {
-      textTransform: "lowercase",
+  },
+  button: {
+    textTransform: "lowercase",
+  },
+  props: {
+    MuiPaper: {
+      square: true,
     },
-    paper: {
-      borderRadius: 20,
+  },
+  overrides: {
+    MuiPaper: {
+      root: {
+        borderRadius: 16,
+      },
     },
   },
 });

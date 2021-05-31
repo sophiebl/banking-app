@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.primary,
     boxShadow: "none",
     borderBottom: `solid 1px ${theme.palette.divider}`,
+    borderRadius: 0,
   },
   menuButton: {
     marginRight: 36,

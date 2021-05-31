@@ -1,14 +1,12 @@
 import React from "react";
-import Typography from "@material-ui/core/Typography";
-import Paper from "@material-ui/core/Paper";
-import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
-import Link from "@material-ui/core/Link";
+import { Box, Link, Grid, Paper, Typography } from "@material-ui/core";
+
 import { makeStyles } from "@material-ui/core/styles";
 
 import ContactsTable from "./ContactsTable";
 import OperationsTimeline from "./OperationsTimeline";
 import LinearProgressWithLabel from "./LinearProgressWithLabel";
+import CBblue from "../assets/CB-blue.png";
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -50,22 +48,23 @@ export default function Main() {
   return (
     <main className={classes.content}>
       <div className={classes.toolbar} />
-
-      {/* <Box p={2} className={classes.mainBackground}> */}
-      <Grid
-        container
-        justify="center"
-        spacing={4}
-        className={classes.mainBackground}
-      >
+      <Grid container justify="center" spacing={3}>
         <Grid item sm={12}>
           <div className={classes.titleContainer}>
             <Typography variant="h3"> OVERVIEW</Typography>
             <Typography variant="h4">Hi Simon, welcome back!</Typography>
           </div>
         </Grid>
-        <Grid item sm={6} spacing={1}>
-          <Box component="paper" p={2}>
+      </Grid>
+
+      <Grid
+        container
+        justify="center"
+        spacing={3}
+        className={classes.mainBackground}
+      >
+        <Grid item sm={6} xs={12} spacing={1}>
+          <Box p={2}>
             <Typography variant="h1" align="center" color="primary">
               1000 €
             </Typography>
@@ -90,12 +89,11 @@ export default function Main() {
               ></Box>
             </Box>
           </Box>
-          {/* </Paper> */}
         </Grid>
-        <Grid item sm={6} spacing={1}>
+        <Grid item sm={6} xs={12} spacing={1}>
           <Paper elevation={3}>
             <Box p={2}>
-              <Typography variant="h5"> Quick transfer: </Typography>
+              <Typography variant="h5"> Quick transfer </Typography>
               <ContactsTable />
               <Box className={classes.linkContainer} p={2}>
                 <Link onClick={preventDefault} color="primary">
@@ -109,7 +107,7 @@ export default function Main() {
           </Paper>
         </Grid>
 
-        <Grid item sm={9} spacing={1}>
+        <Grid item sm={9} xs={12} spacing={1}>
           <Paper elevation={3}>
             <Box p={2}>
               <Typography variant="h5"> Your last transactions </Typography>
@@ -117,18 +115,43 @@ export default function Main() {
             </Box>
           </Paper>
         </Grid>
-        <Grid container item sm={3} spacing={3}>
-          <Grid item sm={12} spacing={1}>
-            <Paper elevation={3}>
-              <Box p={2}>
-                <Typography variant="h5"> Your cards </Typography>
+        <Grid container item sm={3} xs={12} spacing={1}>
+          <Grid item sm={12} xs={12}>
+            <Paper elevation={3} borderRadius={16}>
+              <Box p={2} borderRadius={16}>
+                <Typography variant="h5"> Your credit card </Typography>
+              </Box>
+              <Box
+                display="flex"
+                py={2}
+                flexDirection="column"
+                justifyContent="center"
+              >
+                <Box width="100%" textAlign="center">
+                  <img src={CBblue} alt="your credit card" />
+                </Box>
+                <Box>
+                  <ul>
+                    <li>Plafond: 300€</li>
+                    <li>Découvert autorisé: 500€</li>
+                  </ul>
+                </Box>
+                <Box width="90%" textAlign="right">
+                  <Link onClick={preventDefault} color="primary">
+                    more
+                  </Link>
+                </Box>
               </Box>
             </Paper>
           </Grid>
-          <Grid item sm={12} spacing={1}>
+          <Grid item sm={12} xs={12}>
             <Paper elevation={3}>
-              <Box p={2}>
-                <Typography variant="h5"> Download your RIB </Typography>
+              <Box p={2} bgcolor="#00CEA7" borderRadius={16} textAlign="center">
+                <Typography variant="h6">
+                  <Link onClick={preventDefault} color="#FFFFFF">
+                    Download your RIB
+                  </Link>
+                </Typography>
               </Box>
             </Paper>
           </Grid>
