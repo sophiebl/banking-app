@@ -9,8 +9,10 @@ import MenuIcon from "@material-ui/icons/Menu";
 const useStyles = makeStyles((theme) => ({
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
-    backgroundColor: "#FFF",
+    backgroundColor: theme.palette.background.paper,
+    color: theme.palette.text.primary,
     boxShadow: "none",
+    borderBottom: `solid 1px ${theme.palette.divider}`,
   },
   menuButton: {
     marginRight: 36,
@@ -23,20 +25,6 @@ export default function Header({ handleToggleDrawer }) {
   return (
     <AppBar position="fixed" className={classes.appBar}>
       <Toolbar>
-        <svg
-          width="36"
-          height="33"
-          viewBox="0 0 36 33"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <circle cx="17.6423" cy="22.3003" r="10.0195" fill="#4558DD" />
-          <circle cx="25.2646" cy="10.0195" r="10.0195" fill="#CE00B9" />
-          <circle cx="10.0195" cy="10.0195" r="10.0195" fill="#00CEA7" />
-        </svg>
-        <Typography variant="h2" noWrap>
-          Just Bank
-        </Typography>
         <IconButton
           color="inherit"
           aria-label="open drawer"
@@ -46,6 +34,22 @@ export default function Header({ handleToggleDrawer }) {
         >
           <MenuIcon />
         </IconButton>
+        <div className={classes.logoContainer}>
+          <svg
+            width="36"
+            height="33"
+            viewBox="0 0 36 33"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle cx="17.6423" cy="22.3003" r="10.0195" fill="#4558DD" />
+            <circle cx="25.2646" cy="10.0195" r="10.0195" fill="#CE00B9" />
+            <circle cx="10.0195" cy="10.0195" r="10.0195" fill="#00CEA7" />
+          </svg>
+        </div>
+        <Typography variant="h2" noWrap>
+          Just Bank
+        </Typography>
       </Toolbar>
     </AppBar>
   );

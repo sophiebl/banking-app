@@ -28,7 +28,6 @@ export const themeObjectForType = (type) => ({
     secondary: { main: "#00CEA7", light: "#f75b81", dark: "#ab2344" },
   },
   typography: {
-    fontFamily: ["Nunito Sans", "Helvetica", "Arial", "sans-serif"].join(","),
     h1: {
       fontSize: 80,
       fontWeight: 500,
@@ -51,7 +50,7 @@ export const themeObjectForType = (type) => ({
       fontWeight: 500,
     },
     button: {
-      fontStyle: "italic",
+      textTransform: "lowercase",
     },
     paper: {
       borderRadius: 20,

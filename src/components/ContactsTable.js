@@ -5,9 +5,6 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableRow from "@material-ui/core/TableRow";
-import Link from "@material-ui/core/Link";
-import Paper from "@material-ui/core/Paper";
-import { TableFooter } from "@material-ui/core";
 
 const useStyles = makeStyles({
   table: {
@@ -26,10 +23,9 @@ const rows = [
 
 export default function BasicTable() {
   const classes = useStyles();
-  const preventDefault = (event) => event.preventDefault();
 
   return (
-    <TableContainer component={Paper}>
+    <TableContainer>
       <Table className={classes.table} aria-label="simple table">
         <TableBody>
           {rows.map((row) => (
@@ -40,18 +36,6 @@ export default function BasicTable() {
               <TableCell align="right">{row.protein}</TableCell>
             </TableRow>
           ))}
-          <TableFooter>
-            <TableCell>
-              <Link href="#" onClick={preventDefault} variant="body2">
-                Ajouter un nouveau bénéficiaire
-              </Link>
-            </TableCell>
-            <TableCell>
-              <Link href="#" onClick={preventDefault} variant="body2">
-                Voir tous vos contacts
-              </Link>
-            </TableCell>
-          </TableFooter>
         </TableBody>
       </Table>
     </TableContainer>
