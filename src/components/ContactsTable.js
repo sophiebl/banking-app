@@ -1,19 +1,14 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableRow from "@material-ui/core/TableRow";
+import {
+  TableContainer,
+  Table,
+  TableBody,
+  TableCell,
+  TableRow,
+} from "@material-ui/core";
 
-const useStyles = makeStyles({
-  table: {
-    // minWidth: 650,
-  },
-});
-
-function createData(name, protein) {
-  return { name, protein };
+function createData(name, btn) {
+  return { name, btn };
 }
 
 const rows = [
@@ -22,18 +17,16 @@ const rows = [
 ];
 
 export default function BasicTable() {
-  const classes = useStyles();
-
   return (
     <TableContainer>
-      <Table className={classes.table} aria-label="simple table">
+      <Table aria-label="contacts table">
         <TableBody>
           {rows.map((row) => (
             <TableRow key={row.name}>
               <TableCell component="th" scope="row">
                 {row.name}
               </TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
+              <TableCell align="right">{row.btn}</TableCell>
             </TableRow>
           ))}
         </TableBody>

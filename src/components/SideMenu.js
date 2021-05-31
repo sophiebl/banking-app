@@ -1,12 +1,14 @@
 import React from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
-import Drawer from "@material-ui/core/Drawer";
-import List from "@material-ui/core/List";
-import Divider from "@material-ui/core/Divider";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
+import {
+  ListItemText,
+  ListItemIcon,
+  ListItem,
+  Divider,
+  List,
+  Drawer,
+} from "@material-ui/core";
 import HomeIcon from "@material-ui/icons/Home";
 import AccountBalanceWalletIcon from "@material-ui/icons/AccountBalanceWallet";
 import TransferIcon from "@material-ui/icons/SwapHoriz";
@@ -51,7 +53,7 @@ const menuItems = [
     icon: <HomeIcon />,
   },
   {
-    text: "Accounts",
+    text: "Transactions",
     icon: <AccountBalanceWalletIcon />,
   },
   {

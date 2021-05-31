@@ -29,11 +29,11 @@ export const themeObjectForType = (type) => ({
   },
   typography: {
     h1: {
-      fontSize: 80,
       fontWeight: 500,
     },
     h2: {
       fontSize: 24,
+      fontWeight: 500,
     },
     h3: {
       fontWeight: 500,

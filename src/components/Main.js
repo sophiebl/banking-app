@@ -6,7 +6,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import ContactsTable from "./ContactsTable";
 import OperationsTimeline from "./OperationsTimeline";
 import LinearProgressWithLabel from "./LinearProgressWithLabel";
-import CBblue from "../assets/CB-blue.png";
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -97,10 +96,10 @@ export default function Main() {
               <ContactsTable />
               <Box className={classes.linkContainer} p={2}>
                 <Link onClick={preventDefault} color="primary">
-                  Ajouter un nouveau bénéficiaire
+                  Add new contact
                 </Link>
                 <Link onClick={preventDefault} color="primary">
-                  Voir tous vos contacts
+                  See more contacts
                 </Link>
               </Box>
             </Box>
@@ -128,12 +127,12 @@ export default function Main() {
                 justifyContent="center"
               >
                 <Box width="100%" textAlign="center">
-                  <img src={CBblue} alt="your credit card" />
+                  <img src="/CB-blue.png" alt="your credit card" />
                 </Box>
                 <Box>
                   <ul>
-                    <li>Plafond: 300€</li>
-                    <li>Découvert autorisé: 500€</li>
+                    <li>Ceiling: 300€</li>
+                    <li>Overdraft authorized: 500€</li>
                   </ul>
                 </Box>
                 <Box width="90%" textAlign="right">
