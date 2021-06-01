@@ -74,9 +74,8 @@ export default function Login() {
   return (
     <Container component="main" maxWidth="xs">
       <Box display="flex" flexDirection="column" mt={10}>
-        <Box display="flex" alignItems="center" justifyContent="center">
+        <Box display="flex" justifyContent="center">
           <img src="/logo.svg" alt="" width="100" />
-          <Typography variant="h1">Just Send</Typography>
         </Box>
         <form className={classes.form} onSubmit={handleSubmit}>
           <TextField

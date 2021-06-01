@@ -21,6 +21,9 @@ export const secondaryBackgroundColor = () =>
 
 export const themeObjectForType = (type) => ({
   palette: {
+    background: {
+      default: "#fff",
+    },
     type,
     primary: isLight(type)
       ? { main: "#7B61FF", light: "#FFF", dark: "#4558DD" }

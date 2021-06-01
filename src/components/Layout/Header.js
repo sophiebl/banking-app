@@ -41,7 +41,7 @@ export default function Header({ handleToggleDrawer }) {
         <Box display="flex" alignItems="center" justifyContent="center">
           <img src="/logo.svg" alt="" width="40" />
           <Typography variant="h2" noWrap>
-            Just Send
+            Just Bank
           </Typography>
         </Box>
       </Toolbar>
