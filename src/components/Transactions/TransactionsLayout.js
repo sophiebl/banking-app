@@ -15,7 +15,7 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 
 import { getTransactions } from "../../helpers/auth";
-import CreateTransactionForm from "./CreateTransactionForm";
+import CreateTransactionDialog from "./CreateTransactionDialog";
 
 const useStyles = makeStyles((theme) => ({
   mainBackground: {
@@ -83,7 +83,7 @@ export default function TransactionsLayout({ userData }) {
             <Typography variant="caption">Send Money</Typography>
           </Button>
         </Box>
-        <CreateTransactionForm
+        <CreateTransactionDialog
           openDialog={openDialog}
           uniqueOthersUser={uniqueOthersUser}
           userData={userData}

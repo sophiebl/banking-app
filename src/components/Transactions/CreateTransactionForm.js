@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -10,14 +10,10 @@ import {
   MenuItem,
   FormControl,
   InputLabel,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  Dialog,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
-import { createTransaction } from "../../helpers/auth";
+import { createTransaction, getTransactions } from "../../helpers/auth";
 
 toast.configure();
 
@@ -28,14 +24,12 @@ const useStyles = makeStyles((theme) => ({
   selectEmpty: {
     marginTop: theme.spacing(2),
   },
+  button: {
+    borderRadius: "10px",
+  },
 }));
 
-export default function CreateTransactionForm({
-  openDialog,
-  uniqueOthersUser,
-  userData,
-  handleCloseDialog,
-}) {
+export default function CreateTransactionForm({ userData }) {
   const classes = useStyles();
   const [inputs, setInputs] = useState({
     user_from: userData.id,
@@ -43,6 +37,35 @@ export default function CreateTransactionForm({
     description: "",
     amount: "",
     username: "",
+  });
+
+  const [userTransactions, setUserTransactions] = useState([]);
+
+  useEffect(() => {
+    async function getAllTransactions() {
+      try {
+        const trans = await getTransactions();
+        setUserTransactions(trans);
+      } catch (err) {}
+    }
+    getAllTransactions();
+  }, []);
+
+  const othersUser = userTransactions.map(({ user_from, user_to }) => {
+    return user_from.id === userData.id ? user_to : user_from;
+  });
+
+  let uniqueUserId = [];
+  const uniqueOthersUser = othersUser.filter((user) => {
+    if (
+      !uniqueUserId.includes(user.id) &&
+      Object.keys(user).length !== 0 &&
+      user.id !== userData.id
+    ) {
+      uniqueUserId.push(user.id);
+      return true;
+    }
+    return false;
   });
 
   const handleCreateTransaction = async (event) => {
@@ -74,89 +97,73 @@ export default function CreateTransactionForm({
   };
 
   return (
-    <div>
-      <Dialog
-        open={openDialog}
-        onClose={handleCloseDialog}
-        aria-labelledby="form-dialog-title"
-      >
-        <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
-        <DialogContent>
-          <Box display="flex" flexDirection="column" mt={10}>
-            <form onSubmit={handleCreateTransaction}>
-              <FormControl variant="outlined" className={classes.formControl}>
-                <InputLabel id="user_to">Choose a contacts</InputLabel>
-                <Select
-                  labelId="user_to"
-                  id="user_to"
-                  name="user_to"
-                  onChange={handleInputChange}
-                  value={inputs.user_to ? inputs.user_to : ""}
-                >
-                  {uniqueOthersUser.map(({ id, username }, index) => {
-                    return (
-                      <MenuItem value={id} key={index}>
-                        {username}
-                      </MenuItem>
-                    );
-                  })}
-                </Select>
-              </FormControl>
-              <TextField
-                fullWidth
-                margin="normal"
-                htmlFor="description"
-                type="text"
-                name="description"
-                onChange={handleInputChange}
-                value={inputs.description}
-                id="description"
-                variant="outlined"
-                required
-                autoFocus
-                label="description"
-                autoComplete="on"
-              />
-
-              <TextField
-                fullWidth
-                margin="normal"
-                htmlFor="amount"
-                type="amount"
-                name="amount"
-                onChange={handleInputChange}
-                value={inputs.amount}
-                variant="outlined"
-                id="amount"
-                required
-                label="amount"
-                autoComplete="on"
-              />
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                fullWidth
-              >
-                SEND MONEY
-              </Button>
-            </form>
-          </Box>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCloseDialog} color="primary">
-            Cancel
+    <Box display="flex" flexDirection="column" mt={2}>
+      <form onSubmit={handleCreateTransaction}>
+        <FormControl variant="outlined" className={classes.formControl}>
+          <InputLabel id="user_to">Choose a contacts</InputLabel>
+          <Select
+            labelId="user_to"
+            id="user_to"
+            name="user_to"
+            onChange={handleInputChange}
+            value={inputs.user_to ? inputs.user_to : ""}
+          >
+            {uniqueOthersUser.map(({ id, username }, index) => {
+              return (
+                <MenuItem value={id} key={index}>
+                  {username}
+                </MenuItem>
+              );
+            })}
+          </Select>
+        </FormControl>
+        <TextField
+          fullWidth
+          margin="normal"
+          htmlFor="description"
+          type="text"
+          name="description"
+          onChange={handleInputChange}
+          value={inputs.description}
+          id="description"
+          variant="outlined"
+          required
+          autoFocus
+          label="description"
+          autoComplete="on"
+        />
+        <TextField
+          fullWidth
+          margin="normal"
+          htmlFor="amount"
+          type="amount"
+          name="amount"
+          onChange={handleInputChange}
+          value={inputs.amount}
+          variant="outlined"
+          id="amount"
+          required
+          label="amount"
+          autoComplete="on"
+        />
+        <Box mt={2}>
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            fullWidth
+            className={classes.button}
+          >
+            SEND MONEY
           </Button>
-        </DialogActions>
-      </Dialog>
+        </Box>
+      </form>
       <ToastContainer />
-    </div>
+    </Box>
   );
 }
 
 CreateTransactionForm.propTypes = {
-  openDialog: PropTypes.bool.isRequired,
   uniqueOthersUser: PropTypes.object.isRequired,
   userData: PropTypes.object.isRequired,
-  handleCloseDialog: PropTypes.func.isRequired,
 };

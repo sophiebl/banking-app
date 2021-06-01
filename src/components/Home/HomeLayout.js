@@ -1,11 +1,20 @@
 import React, { useState } from "react";
-import { Box, Link, Grid, Paper, Typography } from "@material-ui/core";
+import {
+  Box,
+  Link,
+  Grid,
+  Paper,
+  Typography,
+  Container,
+} from "@material-ui/core";
+
+import { Link as LinkTo } from "react-router-dom";
 
 import { makeStyles } from "@material-ui/core/styles";
 
-import ContactsTable from "./ContactsTable";
 import OperationsTimeline from "./OperationsTimeline";
 import LinearProgressWithLabel from "./LinearProgressWithLabel";
+import CreateTransactionForm from "../Transactions/CreateTransactionForm";
 
 import { getUser } from "../../helpers/auth";
 
@@ -23,6 +32,10 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
+  },
+  link: {
+    textDecoration: "none",
+    color: "inherit",
   },
 }));
 
@@ -45,55 +58,54 @@ export default function HomeLayout() {
       spacing={2}
       className={classes.mainBackground}
     >
-      <Grid item sm={6} xs={12} spacing={1}>
-        <Box p={2}>
-          <Typography variant="h1" align="center" color="primary">
-            1000 €
-          </Typography>
-          <Box
-            p={2}
-            width="100%"
-            margin="0 auto"
-            display="flex"
-            flexDirection="column"
-            justifyContent="center"
-          >
-            <LinearProgressWithLabel
-              value={60}
-              color="secondary"
-              label={800}
-              incomes
-            />
-            <LinearProgressWithLabel value={30} label={300} expenses />
-            <Box
-              color="primary"
-              style={{ height: 8, width: "25%", borderRadius: 2 }}
-            ></Box>
-          </Box>
-        </Box>
-      </Grid>
-      <Grid item sm={6} xs={12} spacing={1}>
-        <Paper elevation={3}>
+      <Grid item container justify="center" alignItems="center">
+        <Grid item sm={6} xs={12} spacing={1}>
           <Box p={2}>
-            <Typography variant="h5"> Quick transfer </Typography>
-            <ContactsTable userData={userData} />
-            <Box className={classes.linkContainer} p={2}>
-              <Link onClick={preventDefault} color="primary">
-                Add new contact
-              </Link>
-              <Link to="/transactions" onClick={preventDefault} color="primary">
-                See more contacts
-              </Link>
+            <Typography variant="h1" align="center" color="primary">
+              1000 €
+            </Typography>
+            <Box
+              p={2}
+              width="100%"
+              margin="0 auto"
+              display="flex"
+              flexDirection="column"
+              justifyContent="center"
+            >
+              <LinearProgressWithLabel
+                value={60}
+                color="secondary"
+                label={800}
+                incomes
+              />
+              <LinearProgressWithLabel value={30} label={300} expenses />
+              <Box
+                color="primary"
+                style={{ height: 8, width: "25%", borderRadius: 2 }}
+              ></Box>
             </Box>
           </Box>
-        </Paper>
+        </Grid>
+        <Grid item sm={6} xs={12} spacing={1}>
+          <Paper elevation={3}>
+            <Box p={2}>
+              <Container maxWidth="xs">
+                <Box p={2}>
+                  <CreateTransactionForm userData={userData} />
+                </Box>
+              </Container>
+            </Box>
+          </Paper>
+        </Grid>
       </Grid>
 
       <Grid item sm={9} xs={12} spacing={1}>
         <Paper elevation={3}>
           <Box p={2}>
             <Typography variant="h5"> Your last transactions </Typography>
-            <OperationsTimeline transactions={transactions_emitted} />
+            <LinkTo to="/transactions" className={classes.link}>
+              <OperationsTimeline transactions={transactions_emitted} />
+            </LinkTo>
           </Box>
         </Paper>
       </Grid>

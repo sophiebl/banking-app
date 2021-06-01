@@ -51,7 +51,7 @@ export default function OperationsTimeline({ transactions }) {
         </TimelineItem>
       );
     })
-    .slice(0, 3);
+    .slice(49, 52);
 
   return <Timeline align="alternate">{transactionsPreview}</Timeline>;
 }
