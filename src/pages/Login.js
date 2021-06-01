@@ -23,8 +23,6 @@ const useLoginForm = () => {
   });
   const { identifier, password } = inputs;
 
-  console.log(inputs);
-
   const handleSubmit = async (event) => {
     if (event) {
       event.preventDefault();
@@ -65,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Login() {
   const user = getUser();
-  console.log(user);
+
   if (user) {
     window.location = "/";
   }
@@ -75,10 +73,10 @@ export default function Login() {
 
   return (
     <Container component="main" maxWidth="xs">
-      <Box display="flex" flexDirection="column" mt={16}>
+      <Box display="flex" flexDirection="column" mt={10}>
         <Box display="flex" alignItems="center" justifyContent="center">
           <img src="/logo.svg" alt="" width="100" />
-          <Typography variant="h1">Just Bank</Typography>
+          <Typography variant="h1">Just Send</Typography>
         </Box>
         <form className={classes.form} onSubmit={handleSubmit}>
           <TextField

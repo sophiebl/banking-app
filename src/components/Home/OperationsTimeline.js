@@ -9,8 +9,10 @@ import {
   TimelineItem,
   Timeline,
 } from "@material-ui/lab";
-import HotelIcon from "@material-ui/icons/Hotel";
+import AccountBalanceIcon from "@material-ui/icons/AccountBalance";
 import { Typography, Paper } from "@material-ui/core";
+
+import { formatDate } from "../../helpers/DateFormater";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -27,15 +29,15 @@ export default function OperationsTimeline({ transactions }) {
   const transactionsPreview = transactions
     .map(({ amount, created_at, description }, idx) => {
       return (
-        <TimelineItem>
+        <TimelineItem key={idx}>
           <TimelineOppositeContent>
             <Typography variant="body2" color="textSecondary">
-              {created_at}
+              {formatDate(created_at)}
             </Typography>
           </TimelineOppositeContent>
           <TimelineSeparator>
             <TimelineDot color="primary" variant="outlined">
-              <HotelIcon />
+              <AccountBalanceIcon />
             </TimelineDot>
             <TimelineConnector />
           </TimelineSeparator>

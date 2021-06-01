@@ -11,7 +11,6 @@ import {
   Drawer,
 } from "@material-ui/core";
 import HomeIcon from "@material-ui/icons/Home";
-import AccountBalanceWalletIcon from "@material-ui/icons/AccountBalanceWallet";
 import TransferIcon from "@material-ui/icons/SwapHoriz";
 import CbIcon from "@material-ui/icons/Payment";
 import PhoneIcon from "@material-ui/icons/Phone";
@@ -46,6 +45,10 @@ const useStyles = makeStyles((theme) => ({
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
   },
+  link: {
+    color: theme.palette.text.secondary,
+    textDecoration: "none",
+  },
 }));
 
 const menuItems = [
@@ -53,11 +56,6 @@ const menuItems = [
     text: "Overview",
     path: "/",
     icon: <HomeIcon />,
-  },
-  {
-    text: "Accounts",
-    path: "/",
-    icon: <AccountBalanceWalletIcon />,
   },
   {
     text: "Transactions",
@@ -96,7 +94,7 @@ export default function NavBar({ open }) {
       <Divider />
       <List>
         {menuItems.map(({ text, path, icon }, index) => (
-          <Link to={path}>
+          <Link to={path} className={classes.link}>
             <ListItem button key={index}>
               <ListItemIcon>{icon}</ListItemIcon>
               <ListItemText primary={text} />

@@ -3,20 +3,17 @@ const axios = require("axios");
 // Rebuilds auth headers from Auth token stored in browser's localstorage
 function authHeaders() {
   const token = localStorage.getItem("token");
-  console.log(token);
   return { Authorization: `Bearer ${localStorage.getItem("token")}` };
 }
 
 module.exports = {
   async login(identifier, password) {
-    console.log("login");
     const res = await axios.post(
       `https://qontoz.challenge.cloud.escape.tech/auth/local`,
       { identifier, password }
     );
     localStorage.setItem("token", res.data.jwt);
     localStorage.setItem("user", global.JSON.stringify(res.data.user));
-    console.log(res, res.data);
     return res.data.user;
   },
 
@@ -32,7 +29,6 @@ module.exports = {
   },
 
   async fetchMe(options = {}) {
-    console.log(this);
     const userId = this.getUser().id;
     if (userId) {
       return await axios

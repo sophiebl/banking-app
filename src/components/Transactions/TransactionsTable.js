@@ -48,7 +48,6 @@ export default function TransactionsTable() {
   };
 
   useEffect(() => {
-    console.log(userData);
     if (!userData) {
       window.location = "/login";
     }
