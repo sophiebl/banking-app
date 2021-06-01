@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Box, Link, Grid, Paper, Typography } from "@material-ui/core";
 
 import { makeStyles } from "@material-ui/core/styles";
@@ -7,25 +7,9 @@ import ContactsTable from "./ContactsTable";
 import OperationsTimeline from "./OperationsTimeline";
 import LinearProgressWithLabel from "./LinearProgressWithLabel";
 
-import { getUser, getTransactions } from "../../helpers/auth";
+import { getUser } from "../../helpers/auth";
 
 const useStyles = makeStyles((theme) => ({
-  toolbar: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "flex-end",
-    padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
-    ...theme.mixins.toolbar,
-  },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
-  },
-  titleContainer: {
-    color: theme.palette.primary.dark,
-    marginBottom: theme.spacing(3),
-  },
   paper: {
     padding: theme.spacing(1),
     textAlign: "center",
@@ -49,26 +33,10 @@ export default function HomeLayout() {
     window.location = "/login";
   }
 
-  const [userTransactions, setUserTransactions] = useState([]);
-
-  useEffect(() => {
-    async function getAllTransactions() {
-      try {
-        const trans = await getTransactions();
-        setUserTransactions(trans);
-      } catch (err) {}
-    }
-    getAllTransactions();
-  }, []);
-
   const classes = useStyles();
   const preventDefault = (event) => event.preventDefault();
 
-  const { username, transactions_emitted, transactions_received } = userData;
-
-  const users = userTransactions.map((t) => {
-    return t.user_to;
-  });
+  const { transactions_emitted } = userData;
 
   return (
     <Grid
@@ -84,7 +52,7 @@ export default function HomeLayout() {
           </Typography>
           <Box
             p={2}
-            width="80%"
+            width="100%"
             margin="0 auto"
             display="flex"
             flexDirection="column"
@@ -93,7 +61,7 @@ export default function HomeLayout() {
             <LinearProgressWithLabel
               value={60}
               color="secondary"
-              label={1300}
+              label={800}
               incomes
             />
             <LinearProgressWithLabel value={30} label={300} expenses />

@@ -2,7 +2,6 @@ const axios = require("axios");
 
 // Rebuilds auth headers from Auth token stored in browser's localstorage
 function authHeaders() {
-  const token = localStorage.getItem("token");
   return { Authorization: `Bearer ${localStorage.getItem("token")}` };
 }
 

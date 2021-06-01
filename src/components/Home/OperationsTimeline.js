@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   TimelineDot,
@@ -54,3 +55,7 @@ export default function OperationsTimeline({ transactions }) {
 
   return <Timeline align="alternate">{transactionsPreview}</Timeline>;
 }
+
+OperationsTimeline.propTypes = {
+  transactions: PropTypes.object.isRequired,
+};

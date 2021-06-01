@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import Avatar from "boring-avatars";
-
 import {
   TableContainer,
   Table,
@@ -144,3 +144,7 @@ export default function TransactionsLayout({ userData }) {
     </Grid>
   );
 }
+
+TransactionsLayout.propTypes = {
+  userData: PropTypes.object.isRequired,
+};

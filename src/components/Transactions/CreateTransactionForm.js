@@ -1,23 +1,19 @@
 import { useState } from "react";
+import PropTypes from "prop-types";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
 import {
   Button,
-  Container,
-  Typography,
   TextField,
-  Link,
   Box,
-  Grid,
   Select,
   MenuItem,
   FormControl,
   InputLabel,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Dialog,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -27,7 +23,6 @@ toast.configure();
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
-    // margin: theme.spacing(1),
     width: "100%",
   },
   selectEmpty: {
@@ -35,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function FormDialog({
+export default function CreateTransactionForm({
   openDialog,
   uniqueOthersUser,
   userData,
@@ -158,3 +153,10 @@ export default function FormDialog({
     </div>
   );
 }
+
+CreateTransactionForm.propTypes = {
+  openDialog: PropTypes.bool.isRequired,
+  uniqueOthersUser: PropTypes.object.isRequired,
+  userData: PropTypes.object.isRequired,
+  handleCloseDialog: PropTypes.func.isRequired,
+};
